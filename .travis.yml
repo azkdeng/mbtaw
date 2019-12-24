@@ -1,0 +1,23 @@
+dist: xenial
+language: python
+
+python:
+  - 3.5
+  - 3.6
+  - 3.7
+  - 3.8
+
+install: pip install -r test_requirements.txt
+script: make test
+
+jobs:
+  include:
+    - stage: lint
+      python: 3.8
+      install: pip install -r test_requirements.txt
+      script: make lint
+    - stage: coverage
+      python: 3.8
+      install: pip install -r test_requirements.txt
+      script: make coverage
+      after_success: codecov

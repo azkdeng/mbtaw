@@ -1,0 +1,2 @@
+__version__ = '0.0.1'  # pragma: no cover
+from .client import Client  # noqa
