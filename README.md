@@ -1,6 +1,6 @@
-<p align="center">
+<h1 align="center">
 python-mbta
-</p>
+</h1>
 <p align="center">
 <a href="https://travis-ci.com/azkdeng/python-mbta">
     <img src="https://travis-ci.com/azkdeng/python-mbta.svg?branch=master" alt="Build Status" />
