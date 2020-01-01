@@ -1,7 +1,7 @@
 import requests
 
 from mbta.errors import RateLimitError, InvalidQueryParameterError
-from mbta.endpoints import LINES
+from mbta import endpoints
 
 
 class Client():
@@ -72,7 +72,7 @@ class Client():
             requests.Response
                 A list of lines.
         """
-        url = LINES
+        url = endpoints.LINES
         params = {}
 
         if page_offset:
@@ -87,15 +87,54 @@ class Client():
             else:
                 raise InvalidQueryParameterError('Invalid query parameter value for sort: ' + sort)
 
+        if fields_line:
+            params['fields[line]'] = fields_line
+
         if include:
             if include == 'routes':
                 params['include'] = include
             else:
                 raise InvalidQueryParameterError('Invalid query parameter value for include: ' + include)
 
-        # TODO: Add fields_line and filter_id
+        if filter_id:
+            params['filter[id]'] = filter_id
 
-        # Make request
+        resp = self._request(url, params)
+        return resp
+
+    def get_lines_id(self,
+                     line_id: str,
+                     fields_line: str = None,
+                     include: str = None):
+        """Single line, which represents a combination of routes.
+
+        Args:
+            line_id: (required)
+                Unique ID for a line
+            fields_line:
+                Fields to include with the response. Multiple fields MUST be a comma-separated (U+002C COMMA, “,”) list.
+            include:
+                Relationships to include
+                - routes
+        Return:
+            requests.Response
+                A single line.
+        """
+        url = endpoints.LINES + line_id
+        params = {}
+
+        if line_id == '':
+            raise InvalidQueryParameterError('line_id cannot be empty. If you do not need a specific line, use get_lines() instead')
+
+        if fields_line:
+            params['fields[line]'] = fields_line
+
+        if include:
+            if include == 'routes':
+                params['include'] = include
+            else:
+                raise InvalidQueryParameterError('Invalid query parameter value for include: ' + include)
+
         resp = self._request(url, params)
         return resp
 

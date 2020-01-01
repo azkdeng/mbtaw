@@ -6,10 +6,13 @@ import mbta
 API_KEY = os.environ['MBTA_TEST_KEY']
 
 
-class ClientTest(unittest.TestCase):
+class BaseTest(unittest.TestCase):
 
     def setUp(self):
         self.client = mbta.Client(API_KEY)
+
+
+class ClientTest(BaseTest):
 
     def test_create_client_no_key(self):
         with self.assertRaises(TypeError):
@@ -19,10 +22,7 @@ class ClientTest(unittest.TestCase):
         self.assertEqual(self.client._session.headers['X-API-Key'], API_KEY)
 
 
-class RateLimitTest(unittest.TestCase):
-
-    def setUp(self):
-        self.client = mbta.Client(API_KEY)
+class RateLimitTest(BaseTest):
 
     def test_get_rate_limit(self):
         self.assertEqual(self.client.get_rate_limit(), 20)
@@ -39,10 +39,7 @@ class RateLimitTest(unittest.TestCase):
             self.client.get_lines()
 
 
-class LinesTest(unittest.TestCase):
-
-    def setUp(self):
-        self.client = mbta.Client(API_KEY)
+class LinesTest(BaseTest):
 
     def test_get_lines_no_parameters(self):
         resp = self.client.get_lines()
@@ -58,6 +55,27 @@ class LinesTest(unittest.TestCase):
             self.client.get_lines(include='foo')
 
     def test_get_lines_full_parameters(self):
-        resp = self.client.get_lines(page_offset=1, page_limit=10, sort='color', include='routes')
+        resp = self.client.get_lines(page_offset=1, page_limit=10, sort='color', fields_line='color,short_name', include='routes', filter_id='line-Red')
+        self.assertEqual(resp.status_code, 200)
+        self.assertTrue(int(self.client.get_rate_limit_reset() - time.time()) < 60)
+
+
+class LinesIdTest(BaseTest):
+
+    def test_get_lines_id_empty_id(self):
+        with self.assertRaises(mbta.errors.InvalidQueryParameterError):
+            self.client.get_lines_id('')
+
+    def test_get_lines_id_no_parameters(self):
+        resp = self.client.get_lines_id('line-Red')
+        self.assertEqual(resp.status_code, 200)
+        self.assertEqual(resp.url, 'https://api-v3.mbta.com/lines/line-Red')
+
+    def test_get_lines_id_invalid_include(self):
+        with self.assertRaises(mbta.errors.InvalidQueryParameterError):
+            self.client.get_lines_id('line-Red', include='foo')
+
+    def test_get_lines_id_full_parameters(self):
+        resp = self.client.get_lines_id('line-Red', fields_line='color', include='routes')
         self.assertEqual(resp.status_code, 200)
         self.assertTrue(int(self.client.get_rate_limit_reset() - time.time()) < 60)
