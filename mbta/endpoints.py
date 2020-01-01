@@ -1,0 +1,16 @@
+# MBTA API Endpoints
+# flake8: noqa
+API_BASE        = 'https://api-v3.mbta.com/'
+ALERTS          = API_BASE + 'alerts/'
+FACILITIES      = API_BASE + 'facilities/'
+LINES           = API_BASE + 'lines/'
+LIVE_FACILITIES = API_BASE + 'live_facilities/'
+PREDICTIONS     = API_BASE + 'predictions/'
+ROUTES          = API_BASE + 'routes/'
+ROUTE_PATTERNS  = API_BASE + 'route_patterns/'
+SCHEDULES       = API_BASE + 'schedules/'
+SERVICES        = API_BASE + 'services/'
+SHAPES          = API_BASE + 'shapes/'
+STOPS           = API_BASE + 'stops/'
+TRIPS           = API_BASE + 'trips/'
+VEHICLES        = API_BASE + 'vehicles/'
