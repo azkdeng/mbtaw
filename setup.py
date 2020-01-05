@@ -4,7 +4,7 @@ import os
 BASE_DIR = os.path.abspath(os.path.dirname(__file__))
 
 __version__ = None
-with open(os.path.join(BASE_DIR, 'mbta', '__init__.py')) as f:
+with open(os.path.join(BASE_DIR, 'mbtaw', '__init__.py')) as f:
     exec(f.read())
 
 with open(os.path.join(BASE_DIR, 'README.md')) as f:
@@ -17,15 +17,15 @@ with open(os.path.join(BASE_DIR, 'test_requirements.txt')) as f:
     TEST_REQUIREMENTS = f.read().splitlines()
 
 setup(
-    name='python-mbta',
+    name='mbtaw',
     version=__version__,
-    url='https://github.com/azkdeng/python-mbta',
+    url='https://github.com/azkdeng/mbtaw',
     description='Python wrapper for MBTA API v3',
     long_description=README,
     author='Alex Deng',
     author_email='azkdeng@gmail.com',
     license='MIT',
-    packages=['mbta'],
+    packages=['mbtaw'],
     install_requires=REQUIREMENTS,
     classifiers=[
         'Development Status :: 2 - Pre-Alpha',

@@ -1,7 +1,7 @@
 import requests
 
-from mbta.errors import RateLimitError, InvalidQueryParameterError
-from mbta import endpoints
+from mbtaw.errors import RateLimitError, InvalidQueryParameterError
+from mbtaw import endpoints
 
 
 class Client():

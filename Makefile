@@ -6,10 +6,10 @@ clean:
 	rm .coverage
 
 coverage:
-	pytest -s --cov=mbta tests/ --cov-report xml:cov.xml
+	pytest -s --cov=mbtaw tests/ --cov-report xml:cov.xml
 
 lint:
-	flake8 --ignore=E221,E501 mbta tests
+	flake8 --ignore=E221,E501 mbtaw tests
 
 test:
-	pytest -s --cov=mbta tests/
+	pytest -s --cov=mbtaw tests/
