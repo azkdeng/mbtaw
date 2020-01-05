@@ -1,12 +1,12 @@
 <h1 align="center">
-python-mbta
+mbtaw
 </h1>
 <p align="center">
-<a href="https://travis-ci.com/azkdeng/python-mbta">
-    <img src="https://travis-ci.com/azkdeng/python-mbta.svg?branch=master" alt="Build Status" />
+<a href="https://travis-ci.com/azkdeng/mbtaw">
+    <img src="https://travis-ci.com/azkdeng/mbtaw.svg?branch=master" alt="Build Status" />
 </a>
-<a href="https://codecov.io/gh/azkdeng/python-mbta">
-  <img src="https://codecov.io/gh/azkdeng/python-mbta/branch/master/graph/badge.svg?token=8MtHwvgnT7" alt="Coverage"/>
+<a href="https://codecov.io/gh/azkdeng/mbtaw">
+  <img src="https://codecov.io/gh/azkdeng/mbtaw/branch/master/graph/badge.svg?token=8MtHwvgnT7" alt="Coverage"/>
 </a>
 </p>
 
